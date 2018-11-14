@@ -68,16 +68,18 @@ public class MainActivity extends AppCompatActivity {
                 data.put("user", phone_et);
                 data.put("password", password_et);
                 data.put("key", key_et);
-                final Requestthread myreq = new Requestthread("signup",data);
-                myreq.start();
-
-                try {
-                    myreq.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                textView.setText(myreq.getResult());
+                new Requestthread("signup",data){
+                    @Override
+                    public void run(){
+                        request();
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                textView.setText(getResult());
+                            }
+                        });
+                    }
+                }.start();
             }
         });
 
@@ -149,18 +151,19 @@ public class MainActivity extends AppCompatActivity {
                 Map<String, String> data = new HashMap<>();
                 data.put("user", phone_et);
                 data.put("password", password_et);
-                final Requestthread myreq = new Requestthread("login", data);
-
-
-                myreq.start();
-                try {
-                    myreq.join(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                cookie[0] = myreq.getCookie();
-
-                textView.setText(myreq.getResult());
+                new Requestthread("login", data){
+                    @Override
+                    public void run(){
+                        request();
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                textView.setText(getResult());
+                            }
+                        });
+                        cookie[0]=getCookie();
+                    }
+                }.start();
             }
         });
 
@@ -170,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),url[0],Toast.LENGTH_LONG).show();
                 System.out.println(url[0]);
-                final Requestthread myreq = new Requestthread(url[0],new HashMap<String, String>()) {
+                new Requestthread(url[0],new HashMap<String, String>()) {
                     @Override
                     public void run() {
                         this.request();
@@ -181,8 +184,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                     }
-                };
-                myreq.start();
+                }.start();
             }
         });
 
