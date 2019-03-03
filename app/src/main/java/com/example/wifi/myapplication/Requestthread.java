@@ -16,7 +16,7 @@ import java.util.Objects;
 
 class Requestthread extends Thread {
     private String result; //请求结果
-    private final StringBuilder urlbuilder = new StringBuilder(); //构造一个请求链接
+    private StringBuilder urlbuilder = new StringBuilder(); //构造一个请求链接
     private StringBuilder cookie = new StringBuilder(); //请求,返回的cookie
     private Bitmap bresult; //图片输出
 
@@ -24,22 +24,7 @@ class Requestthread extends Thread {
     //构造函数,目的是为了创建对象
     Requestthread(String url, Map<String, String> data) //url:访问路径  Map<String,String> data  是请求参数
     {
-        if (!url.contains("http")) {//1.判断请求是否是http / https  2.绝对路径(图片)与相对路径(服务器)通用
-            urlbuilder.append("http://111.230.150.41:8000/").append(url).append("?"); //动态构造链接
-        }else {
-            url = url.replaceAll("https", "http"); //针对豆瓣的图片
-            urlbuilder.append(url).append("?"); //动态构造链接
-        }
-        boolean flag = false; //看是否有参数
-        for (String key : data.keySet()) { //遍历参数
-            flag = true;
-            urlbuilder.append(key);
-            urlbuilder.append("=");
-            urlbuilder.append(data.get(key)); // {'num'='123456','password'='123'} ==> ''==>num=123456&password=123
-            urlbuilder.append("&");
-        }
-        if (flag)
-            urlbuilder.deleteCharAt(urlbuilder.length() - 1); //去掉&元素
+        setUrlbuilder(url,data);
     } //构造结束
 
 
@@ -83,7 +68,6 @@ class Requestthread extends Thread {
                 out.close();
                 in.close();
 
-
                 Map<String, List<String>> head = connection.getHeaderFields(); //取出响应头
                 for (String i : head.keySet()) {
                     if (i != null && i.equals("Set-Cookie"))//取出set-cookie
@@ -118,6 +102,30 @@ class Requestthread extends Thread {
 
     String getResult() {
         return result;
+    }
+
+    void setUrlbuilder(String url, Map<String, String> data) {
+
+        urlbuilder=new StringBuilder();
+        if (!url.contains("http")) {//1.判断请求是否是http / https  2.绝对路径(图片)与相对路径(服务器)通用
+            urlbuilder.append("http://111.230.150.41:8000/").append(url).append("?"); //动态构造链接
+        }else {
+            url = url.replaceAll("https", "http"); //针对豆瓣的图片
+            urlbuilder.append(url).append("?"); //动态构造链接
+        }
+
+        if (data!=null) {
+            boolean flag = false; //看是否有参数
+            for (String key : data.keySet()) { //遍历参数
+                flag = true;
+                urlbuilder.append(key);
+                urlbuilder.append("=");
+                urlbuilder.append(data.get(key)); // {'num'='123456','password'='123'} ==> ''==>num=123456&password=123
+                urlbuilder.append("&");
+            }
+            if (flag)
+                urlbuilder.deleteCharAt(urlbuilder.length() - 1); //去掉&元素
+        }
     }
 
     String geturl() {

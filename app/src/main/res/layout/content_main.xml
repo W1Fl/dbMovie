@@ -16,104 +16,125 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
-            <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="手机号码 编号"
+            android:inputType="phone"
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="173dp" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="密码 片名"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="296dp" />
+
+        <EditText
+            android:id="@+id/key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="验证码 查询数量"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="296dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/login_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="登录" />
 
-            <EditText
-                android:id="@+id/phone"
+            <Button
+                android:id="@+id/send_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="手机号码 编号"
-                android:inputType="phone"
-                tools:layout_editor_absoluteX="85dp"
-                tools:layout_editor_absoluteY="173dp" />
+                android:text="发送验证码" />
 
-            <EditText
-                android:id="@+id/password"
+            <Button
+                android:id="@+id/search_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="密码 片名"
-                android:inputType="textPersonName"
-                tools:layout_editor_absoluteX="85dp"
-                tools:layout_editor_absoluteY="296dp" />
+                android:text="查询数据" />
 
-            <EditText
-                android:id="@+id/key"
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/signup_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="验证码"
-                android:inputType="textPersonName"
-                tools:layout_editor_absoluteX="85dp"
-                tools:layout_editor_absoluteY="296dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/login_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="登录" />
-
-                <Button
-                    android:id="@+id/send_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="发送验证码" />
-
-                <Button
-                    android:id="@+id/search_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="查询数据" />
-
-            </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal">
-                <Button
-                    android:id="@+id/signup_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="注册" />
-                <Button
-                    android:id="@+id/getimg_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="加载图片" />
-                    
-
-
-            </LinearLayout>
+                android:text="注册" />
 
 
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:contentDescription="@string/app_name"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="显示内容" />
+
+
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-            <TextView
-                android:id="@+id/textView"
+
+            <LinearLayout
+                android:id="@+id/moviesView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="显示内容" />
+                android:orientation="vertical">
+
+                <!--<include layout="@layout/item" />-->
+
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/gg"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<ImageView-->
+                        <!--android:id="@+id/imageView"-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:layout_height="160dp"-->
+                        <!--android:contentDescription="@string/app_name"-->
+                        <!--app:srcCompat="@drawable/ic_launcher_foreground"-->
+                        <!--tools:ignore="VectorDrawableCompat" />-->
+                    <!--<TextView-->
+                    <!--android:id="@+id/simpletextView"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="" />-->
+                <!--</LinearLayout>-->
+            </LinearLayout>
         </ScrollView>
+
 
     </LinearLayout>
 
